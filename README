@@ -1,0 +1,30 @@
+README of Samurai
+
+  Copyright (c) 2014-2021 Joan Sala Soler
+
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
+
+======================================================================
+
+  What is it?
+  -----------
+
+  A General Game Playing (GGP) engine.
+
+  The Latest Version
+  ------------------
+
+  Information on the latest version of this software and its current
+  development can be found on http://www.joansala.com/ggp/
+
+  Installation
+  ------------
+
+  Please see the INSTALL file.
+
+  Licensing
+  ---------
+
+  Please see the COPYING file.
