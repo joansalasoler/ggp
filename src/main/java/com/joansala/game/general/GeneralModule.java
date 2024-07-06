@@ -79,10 +79,8 @@ public class GeneralModule extends BaseModule {
      */
     @Override
     public String[] getServiceParameters() {
-        String main = getClass().getName();
         String gamePath = GeneralCommand.gamePath;
-        String[] params = { main, gamePath, "service" };
-        return params;
+        return new String[] { gamePath, "service" };
     }
 
 
