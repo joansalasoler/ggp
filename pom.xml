@@ -167,6 +167,11 @@
       <version>${samurai.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>7.0.0</version>
+    </dependency>
+    <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli-codegen</artifactId>
       <version>4.7.6</version>
