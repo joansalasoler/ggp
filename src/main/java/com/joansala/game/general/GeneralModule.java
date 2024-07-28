@@ -48,7 +48,7 @@ public class GeneralModule extends BaseModule {
      * Command line interface.
      */
     @Command(
-      name = "general",
+      name = "ggp",
       version = "1.0.0",
       description =
         "General Game Playing games. A cloud repository and a game name " +
