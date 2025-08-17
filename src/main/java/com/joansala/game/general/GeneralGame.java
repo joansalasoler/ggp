@@ -113,7 +113,7 @@ public class GeneralGame extends BaseGame {
         states = new MachineState[capacity];
         hashes = new long[capacity];
         cursors = new int[capacity];
-        setBoard(new GeneralBoard(machine));
+        setStartingBoard(new GeneralBoard(machine));
     }
 
 
@@ -153,7 +153,7 @@ public class GeneralGame extends BaseGame {
      * {@inheritDoc}
      */
     @Override
-    public Board getBoard() {
+    public Board getStartingBoard() {
         return board;
     }
 
@@ -162,15 +162,15 @@ public class GeneralGame extends BaseGame {
      * {@inheritDoc}
      */
     @Override
-    public void setBoard(Board board) {
-        setBoard((GeneralBoard) board);
+    public void setStartingBoard(Board board) {
+        setStartingBoard((GeneralBoard) board);
     }
 
 
     /**
-     * {@see #setBoard(Board)}
+     * {@see #setStartingBoard(Board)}
      */
-    public void setBoard(GeneralBoard board) {
+    public void setStartingBoard(GeneralBoard board) {
         this.index = -1;
         this.board = board;
         this.move = NULL_MOVE;
@@ -213,7 +213,7 @@ public class GeneralGame extends BaseGame {
      * {@inheritDoc}
      */
     @Override
-    public GeneralBoard toBoard() {
+    public GeneralBoard getCurrentBoard() {
         return new GeneralBoard(state);
     }
 

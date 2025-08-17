@@ -66,7 +66,7 @@ public class GeneralBoard extends BaseBoard<MachineState> {
      * {@inheritDoc}
      */
     @Override
-    public int toMove(String notation) {
+    public int parseCoordinates(String notation) {
         return Integer.parseInt(notation);
     }
 
@@ -84,7 +84,7 @@ public class GeneralBoard extends BaseBoard<MachineState> {
      * {@inheritDoc}
      */
     @Override
-    public GeneralBoard toBoard(String notation) {
+    public GeneralBoard fromDiagram(String notation) {
         throw new UnsupportedOperationException();
     }
 
