@@ -110,6 +110,15 @@ public class GeneralBoard extends BaseBoard<MachineState> {
      * {@inheritDoc}
      */
     @Override
+    public long hash() {
+        return position.hashCode();
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
         return position.getContents().stream()
             .map(key -> key.toString()).sorted()
