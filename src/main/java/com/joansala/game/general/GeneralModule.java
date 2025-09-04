@@ -18,10 +18,10 @@ package com.joansala.game.general;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 import com.google.inject.Provides;
+
 import org.ggp.base.util.game.CloudGameRepository;
 import org.ggp.base.util.game.GameRepository;
 import org.ggp.base.util.statemachine.StateMachine;
@@ -53,15 +53,27 @@ public class GeneralModule extends BaseModule {
       description =
         "General Game Playing games. A cloud repository and a game name " +
         "must be specified to launch the engine, for example, to play " +
-        "Reversi with «games.ggp.org/stanford:reversi». Repositories " +
-        "can be found at http://games.ggp.org/."
+        "Reversi with «games.ggp.org/stanford:reversi». Known repoistories " +
+        "are «games.ggp.org/stanford» and «games.ggp.org/dresden».",
+      subcommands = { ListCommand.class }
     )
     private static class GeneralCommand extends MainCommand {
         @Parameters(
-            paramLabel = "<repository>:<game>",
-            description = "Cloud game identifier"
+            paramLabel = "<repository>[:<game>]",
+            description = "Repository or cloud game identifier"
         )
         private static String gamePath;
+    }
+
+    @Command(
+      name = "list",
+      description = "List games on a remote repository",
+      mixinStandardHelpOptions = true
+    )
+    static class ListCommand implements Runnable {
+        @Override public void run() {
+            printGames(GeneralCommand.gamePath);
+        }
     }
 
 
@@ -119,17 +131,41 @@ public class GeneralModule extends BaseModule {
 
 
     /**
+     * List all the games on a remote repository.
+     *
+     * @param path      Cloud repository URI
+     */
+    private static void printGames(String path) {
+        String[] uri = path.split(":");
+        GameRepository repo = new CloudGameRepository(uri[0]);
+
+        for (var key : repo.getGameKeys()) {
+            var game = repo.getGame(key);
+            String name = game.getName();
+            System.out.format("%s:%s (%s)%n", uri[0], key, name);
+        }
+    }
+
+
+    /**
      * Exectues the command line interface.
      *
      * @param args      Command line parameters
      */
     public static void main(String[] args) throws Exception {
-        if (args.length > 0 && args[0].matches("[^:]+[:][^:]+")) {
-            GeneralModule.machine = createStateMachine(args[0]);
-        }
-
-        BaseModule module = new GeneralModule();
         GeneralCommand main = new GeneralCommand();
-        System.exit(main.execute(module, args));
+
+        try {
+            if (args.length > 0 && args[0].matches("[^:]+[:][^:]+")) {
+                GeneralModule.machine = createStateMachine(args[0]);
+            }
+        } catch (Exception e) {
+            BaseModule module = new GeneralModule();
+            main.error(module, e);
+            System.exit(1);
+        } finally {
+            BaseModule module = new GeneralModule();
+            System.exit(main.execute(module, args));
+        }
     }
 }
