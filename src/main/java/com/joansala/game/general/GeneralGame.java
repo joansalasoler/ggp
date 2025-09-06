@@ -43,7 +43,8 @@ public class GeneralGame extends BaseGame {
     private static final int CAPACITY_INCREMENT = 128;
 
     /** A move that moves nothing */
-    private static final Move NOOP_MOVE = new Move(GdlPool.getConstant("noop"));
+    private static final Move NOOP_MOVE = new Move(
+        GdlPool.getConstant("noop"));
 
     /** Cursor for an endgame state */
     private static final int ENDGAME_CURSOR = -2;
@@ -438,7 +439,7 @@ public class GeneralGame extends BaseGame {
             moves = Arrays.copyOf(moves, size);
             cursors = Arrays.copyOf(cursors, size);
             hashes = Arrays.copyOf(hashes, size);
-            states = Arrays.copyOf(states, size << 4);
+            states = Arrays.copyOf(states, size);
             capacity = size;
 
             System.gc();

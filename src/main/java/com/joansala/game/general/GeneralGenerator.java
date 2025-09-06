@@ -43,7 +43,6 @@ public class GeneralGenerator {
 
     /** Current capacity */
     private int capacity = DEFAULT_CAPACITY;
-    /** State machine for the current game rules */
 
 
     /**
